@@ -9,37 +9,37 @@ z2
 !i10f 100
 cModel Technology
 dC:/intelFPGA/20.1
-Ecrc
-Z0 w1708005360
+Efcs_check_serial
+Z0 w1708521951
 Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z2 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 68
+!i122 158
 Z3 dC:/Users/jaro/Desktop/34349-crc-exercise
 Z4 8C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd
 Z5 FC:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd
 l0
 L4 1
-VlSS4:mOMYzl7>Loo_P>YG1
-!s100 4:>RzDcd]N6C`K8z7b=:D0
+VkEDe;`kkW9i0Cm@0AVF>Q1
+!s100 Jhfnh8<_B73J1[1dN=2fn2
 Z6 OV;C;2020.1;71
 32
-Z7 !s110 1708005722
+Z7 !s110 1708521956
 !i10b 1
-Z8 !s108 1708005722.000000
+Z8 !s108 1708521956.000000
 Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd|
 Z10 !s107 C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd|
 !i113 1
 Z11 o-work work -2002 -explicit
 Z12 tExplicit 1 CvgOpt 0
-Aimp_crc
+Afcs_arch
 R1
 R2
-DEx4 work 3 crc 0 22 lSS4:mOMYzl7>Loo_P>YG1
-!i122 68
-l15
-L12 50
-VIcOgVhgKM6EP<g;1<<G`n1
-!s100 =;QBbRLTba32JWWoFUgN=1
+DEx4 work 16 fcs_check_serial 0 22 kEDe;`kkW9i0Cm@0AVF>Q1
+!i122 158
+l17
+L14 50
+VVk@MV79I4EOMleWWgJ_Vo0
+!s100 >VA]8^MU<S`9c9cJT?RLH3
 R6
 32
 R7
@@ -50,18 +50,18 @@ R10
 !i113 1
 R11
 R12
-Ecrc_tb
-Z13 w1708005657
+Efcs_check_serial_tb
+Z13 w1708521771
 R1
 R2
-!i122 69
+!i122 159
 R3
 Z14 8C:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd
 Z15 FC:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd
 l0
 L4 1
-V34;E_=zVV0LTmS53J5WU53
-!s100 g4@6N[4bY_bSM8ZZJ>kHD3
+VQIA>:Z11]XRbcHeP40?[_1
+!s100 g2K:4RjoB;6>NZOZ;A:I^1
 R6
 32
 R7
@@ -75,12 +75,12 @@ R12
 Atestbench
 R1
 R2
-Z18 DEx4 work 6 crc_tb 0 22 34;E_=zVV0LTmS53J5WU53
-!i122 69
-l28
-Z19 L7 93
-VBGaEdVn9WgeJkmGk6ea]D1
-!s100 C<Vg?U>WQS:D?9DzAj6Fn0
+Z18 DEx4 work 19 fcs_check_serial_tb 0 22 QIA>:Z11]XRbcHeP40?[_1
+!i122 159
+l29
+Z19 L7 94
+Z20 VK2ebbcjR`?V6@_@bcAn783
+Z21 !s100 RE9_S;KePJ0CPR0i_nKm63
 R6
 32
 R7
