@@ -1,0 +1,76 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity fcs_check_parallel_tb is
+end fcs_check_parallel_tb;
+
+architecture testbench of fcs_check_parallel_tb is
+
+    component fcs_check_parallel
+        port (
+            clk, rst, start_of_frame, end_of_frame : in std_logic;
+            data_in        : in  std_logic_vector(7 downto 0);
+            fcs_error : out std_logic
+        );
+    end component;
+    
+	--constant sequence : string := "00000000000100001010010001111011111010101000000000000000000100100011010001010110011110001001000000001000000000000100010100000000000000000010111010110011111111100000000000000000100000000001000100000101010000001100000010101000000000000010110011000000101010000000000000000100000001000000000000000100000000000000000000011010001011011110100000000000000000010000001000000011000001000000010100000110000001110000100000001001000010100000101100001100000011010000111000001111000100000001000111100110110001010011110110110010";
+    constant clk_period : time := 10 ns;
+    constant sequence : std_logic_vector(511 downto 0) := x"0010A47BEA8000123456789008004500002EB3FE000080110540C0A8002CC0A8000404000400001A2DE8000102030405060708090A0B0C0D0E0F1011E6C53DB2";
+
+    signal clk_tb, rst_tb, start_of_frame_tb, end_of_frame_tb : std_logic := '0';
+    signal data_in_tb        : std_logic_vector(7 downto 0) := (others => '0');
+    signal fcs_error_tb : std_logic := '1';    
+
+begin
+    fcs_instance: fcs_check_parallel port map (
+        data_in => data_in_tb,
+        start_of_frame => start_of_frame_tb,
+        end_of_frame => end_of_frame_tb,
+        rst => rst_tb,
+        clk => clk_tb,
+        fcs_error => fcs_error_tb
+    );
+
+    clk_process: process
+    begin
+        while now < clk_period * 100 loop
+            clk_tb <= '0';
+            wait for clk_period / 2;
+            clk_tb <= '1';
+            wait for clk_period / 2;
+        end loop;
+        wait;
+    end process;
+
+    stimulus: process
+    begin
+        rst_tb <= '1';
+        start_of_frame_tb <= '0';
+        end_of_frame_tb <= '0';
+        data_in_tb <= (others => '0');
+        wait for clk_period;
+
+        rst_tb <= '0';
+
+        for i in 63 downto 0 loop
+            if i = 63 then
+                start_of_frame_tb <= '1';
+            else
+                start_of_frame_tb <= '0';
+            end if;
+
+            -- Assign 8 bits from sequence to data_in_tb
+            data_in_tb <= sequence(((i + 1) * 8 - 1) downto i * 8);
+
+            if i = 3 then
+                end_of_frame_tb <= '1';
+            else
+                end_of_frame_tb <= '0';
+            end if;
+            wait for clk_period;
+        end loop;	
+
+        wait;
+    end process;
+end architecture;

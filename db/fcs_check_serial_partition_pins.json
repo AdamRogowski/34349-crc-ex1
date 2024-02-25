@@ -1,0 +1,161 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "fcs_reg_output[0]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[1]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[2]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[3]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[4]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[5]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[6]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[7]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[8]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[9]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[10]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[11]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[12]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[13]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[14]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[15]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[16]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[17]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[18]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[19]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[20]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[21]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[22]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[23]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[24]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[25]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[26]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[27]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[28]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[29]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[30]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_reg_output[31]",
+					"strict" : false
+				},
+				{
+					"name" : "fcs_error",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "rst",
+					"strict" : false
+				},
+				{
+					"name" : "start_of_frame",
+					"strict" : false
+				},
+				{
+					"name" : "end_of_frame",
+					"strict" : false
+				},
+				{
+					"name" : "data_in",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

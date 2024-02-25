@@ -9,28 +9,110 @@ z2
 !i10f 100
 cModel Technology
 dC:/intelFPGA/20.1
-Efcs_check_serial
-Z0 w1708857209
+Efcs_check_parallel
+Z0 w1708865041
 Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z2 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 324
+!i122 384
 Z3 dC:/Users/jaro/Desktop/34349-crc-exercise
-Z4 8C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd
-Z5 FC:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd
+Z4 8C:/Users/jaro/Desktop/34349-crc-exercise/crc_parallel.vhd
+Z5 FC:/Users/jaro/Desktop/34349-crc-exercise/crc_parallel.vhd
+l0
+L4 1
+VjETR9Z7AWaM2=n;[gSOG40
+!s100 _N;eOIVIV48zg`GaeQn?W0
+Z6 OV;C;2020.1;71
+32
+Z7 !s110 1708865053
+!i10b 1
+Z8 !s108 1708865053.000000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jaro/Desktop/34349-crc-exercise/crc_parallel.vhd|
+Z10 !s107 C:/Users/jaro/Desktop/34349-crc-exercise/crc_parallel.vhd|
+!i113 1
+Z11 o-work work -2002 -explicit
+Z12 tExplicit 1 CvgOpt 0
+Afcs_arch
+R1
+R2
+DEx4 work 18 fcs_check_parallel 0 22 jETR9Z7AWaM2=n;[gSOG40
+!i122 384
+l15
+L12 69
+VjbA?1L5EXZgZn`@DA>7=L1
+!s100 A6ofFdOX=JcWWSN`f8`g00
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Efcs_check_parallel_tb
+Z13 w1708864961
+R1
+R2
+!i122 385
+R3
+Z14 8C:/Users/jaro/Desktop/34349-crc-exercise/tcrc_parallel.vhd
+Z15 FC:/Users/jaro/Desktop/34349-crc-exercise/tcrc_parallel.vhd
+l0
+L4 1
+VV_Q5_65?Non6;WIdC`Y;U3
+!s100 gE?<8CRfCa2f3nln1:RBj1
+R6
+32
+R7
+!i10b 1
+R8
+Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jaro/Desktop/34349-crc-exercise/tcrc_parallel.vhd|
+Z17 !s107 C:/Users/jaro/Desktop/34349-crc-exercise/tcrc_parallel.vhd|
+!i113 1
+R11
+R12
+Atestbench
+R1
+R2
+Z18 DEx4 work 21 fcs_check_parallel_tb 0 22 V_Q5_65?Non6;WIdC`Y;U3
+!i122 385
+l25
+L7 70
+V`I>m@Y<cW]9HAjAjLN@483
+!s100 gGbco[[ZJ:H]M;NdgnWSJ2
+R6
+32
+R7
+!i10b 1
+R8
+R16
+R17
+!i113 1
+R11
+R12
+Efcs_check_serial
+Z19 w1708857209
+R1
+R2
+!i122 324
+R3
+Z20 8C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd
+Z21 FC:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd
 l0
 L4 1
 V?5_Z>Bo0ID>h;<g6jF9cg2
 !s100 XjV`E8ng^Sz2mMEDQCCo71
-Z6 OV;C;2020.1;71
+R6
 32
-Z7 !s110 1708857422
+Z22 !s110 1708857422
 !i10b 1
-Z8 !s108 1708857422.000000
-Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd|
-Z10 !s107 C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd|
+Z23 !s108 1708857422.000000
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd|
+Z25 !s107 C:/Users/jaro/Desktop/34349-crc-exercise/crc.vhd|
 !i113 1
-Z11 o-work work -2002 -explicit
-Z12 tExplicit 1 CvgOpt 0
+R11
+R12
 Afcs_arch
 R1
 R2
@@ -42,73 +124,52 @@ V@DBz?ikVJ1JAchA]UmJRK1
 !s100 ^RSEQzCKAoMkmHWE3>KFL0
 R6
 32
-R7
+R22
 !i10b 1
-R8
-R9
-R10
+R23
+R24
+R25
 !i113 1
 R11
 R12
-Abehavioral
-DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
-R1
-R2
-DEx4 work 16 fcs_check_serial 0 22 8RJ4EkMcICgo7M8PnaTLi2
-!i122 229
-l21
-L14 89
-VRF@JIzoh`EZYi`jKH;ZBA2
-!s100 g_D>:f4@`VdjA<c;`98l:3
-R6
-32
-!s110 1708792338
-!i10b 1
-!s108 1708792338.000000
-R9
-R10
-!i113 1
-R11
-R12
-w1708792329
 Efcs_check_serial_tb
-Z13 w1708857417
+Z26 w1708857417
 R1
 R2
 !i122 325
 R3
-Z14 8C:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd
-Z15 FC:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd
+Z27 8C:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd
+Z28 FC:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd
 l0
 L4 1
 VQIA>:Z11]XRbcHeP40?[_1
 !s100 g2K:4RjoB;6>NZOZ;A:I^1
 R6
 32
-R7
+R22
 !i10b 1
-R8
-Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd|
-Z17 !s107 C:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd|
+R23
+Z29 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd|
+Z30 !s107 C:/Users/jaro/Desktop/34349-crc-exercise/tcrc.vhd|
 !i113 1
 R11
 R12
 Atestbench
 R1
 R2
-Z18 DEx4 work 19 fcs_check_serial_tb 0 22 QIA>:Z11]XRbcHeP40?[_1
+DEx4 work 19 fcs_check_serial_tb 0 22 QIA>:Z11]XRbcHeP40?[_1
 !i122 325
 l24
-Z19 L7 84
+L7 84
 VGgjN;]`Y[5ef3d>M1bG[P1
 !s100 _MXS:TdBd=5SAbjeS2ST[0
 R6
 32
-R7
+R22
 !i10b 1
-R8
-R16
-R17
+R23
+R29
+R30
 !i113 1
 R11
 R12

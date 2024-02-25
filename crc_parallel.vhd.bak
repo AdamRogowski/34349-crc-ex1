@@ -1,0 +1,82 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity fcs_check_parallel is
+    port ( 
+        clk, rst, start_of_frame, end_of_frame : in std_logic;
+		data_in        : in  std_logic_vector(7 downto 0);
+		fcs_error : out std_logic
+    );
+end fcs_check_parallel;
+
+architecture fcs_arch of fcs_check_parallel is
+    signal fcs_reg : std_logic_vector (31 downto 0) := (others => '0');
+    signal complement_counter : integer range 0 to 3 := 0;
+begin
+
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            fcs_reg <= (others => '0');
+            complement_counter <= 0;
+			fcs_error <= '1';
+        elsif rising_edge(clk) then
+            if start_of_frame = '1' or end_of_frame = '1' then
+                complement_counter <= 0;
+            elsif complement_counter < 3 then
+                complement_counter <= complement_counter + 1;
+            end if;
+
+            if complement_counter < 3 or start_of_frame = '1' or end_of_frame = '1' then
+                fcs_reg(0) <= fcs_reg(24) xor fcs_reg(30) xor not data_in(0);
+				fcs_reg(1) <= fcs_reg(24) xor fcs_reg(25) xor fcs_reg(30) xor fcs_reg(31) xor not data_in(1);
+				fcs_reg(2) <= fcs_reg(24) xor fcs_reg(25) xor fcs_reg(26) xor fcs_reg(30) xor fcs_reg(31) xor not data_in(2);
+				fcs_reg(3) <= fcs_reg(25) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(31) xor not data_in(3);
+				fcs_reg(4) <= fcs_reg(24) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(28) xor fcs_reg(30) xor not data_in(4);
+				fcs_reg(5) <= fcs_reg(24) xor fcs_reg(25) xor fcs_reg(27) xor fcs_reg(28) xor fcs_reg(29) xor fcs_reg(30) xor fcs_reg(31) xor not data_in(5);
+				fcs_reg(6) <= fcs_reg(25) xor fcs_reg(26) xor fcs_reg(28) xor fcs_reg(29) xor fcs_reg(30) xor fcs_reg(31) xor not data_in(6);
+				fcs_reg(7)  <= fcs_reg(24) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(29) xor fcs_reg(31) xor not data_in(7);
+            else
+                fcs_reg(0) <= fcs_reg(24) xor fcs_reg(30) xor data_in(0);
+				fcs_reg(1) <= fcs_reg(24) xor fcs_reg(25) xor fcs_reg(30) xor fcs_reg(31) xor data_in(1);
+				fcs_reg(2) <= fcs_reg(24) xor fcs_reg(25) xor fcs_reg(26) xor fcs_reg(30) xor fcs_reg(31) xor data_in(2);
+				fcs_reg(3) <= fcs_reg(25) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(31) xor data_in(3);
+				fcs_reg(4) <= fcs_reg(24) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(28) xor fcs_reg(30) xor data_in(4);
+				fcs_reg(5) <= fcs_reg(24) xor fcs_reg(25) xor fcs_reg(27) xor fcs_reg(28) xor fcs_reg(29) xor fcs_reg(30) xor fcs_reg(31) xor data_in(5);
+				fcs_reg(6) <= fcs_reg(25) xor fcs_reg(26) xor fcs_reg(28) xor fcs_reg(29) xor fcs_reg(30) xor fcs_reg(31) xor data_in(6);
+				fcs_reg(7)  <= fcs_reg(24) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(29) xor fcs_reg(31) xor data_in(7);
+            end if;
+
+  
+fcs_reg(8)  <= fcs_reg(0) xor fcs_reg(24) xor fcs_reg(25) xor fcs_reg(27) xor fcs_reg(28);
+fcs_reg(9)  <= fcs_reg(1) xor fcs_reg(25) xor fcs_reg(26) xor fcs_reg(28) xor fcs_reg(29);
+fcs_reg(10) <= fcs_reg(2) xor fcs_reg(24) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(29);
+fcs_reg(11) <= fcs_reg(3) xor fcs_reg(24) xor fcs_reg(25) xor fcs_reg(27) xor fcs_reg(28);
+fcs_reg(12) <= fcs_reg(4) xor fcs_reg(24) xor fcs_reg(25) xor fcs_reg(26) xor fcs_reg(28) xor fcs_reg(29) xor fcs_reg(30);
+fcs_reg(13) <= fcs_reg(5) xor fcs_reg(25) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(29) xor fcs_reg(30) xor fcs_reg(31);
+fcs_reg(14) <= fcs_reg(6) xor fcs_reg(26) xor fcs_reg(27) xor fcs_reg(28) xor fcs_reg(30) xor fcs_reg(31);
+fcs_reg(15) <= fcs_reg(7) xor fcs_reg(27) xor fcs_reg(28) xor fcs_reg(29) xor fcs_reg(31);
+fcs_reg(16) <= fcs_reg(8) xor fcs_reg(24) xor fcs_reg(28) xor fcs_reg(29);
+fcs_reg(17) <= fcs_reg(9) xor fcs_reg(25) xor fcs_reg(29) xor fcs_reg(30);
+fcs_reg(18) <= fcs_reg(10) xor fcs_reg(26) xor fcs_reg(30) xor fcs_reg(31);
+fcs_reg(19) <= fcs_reg(11) xor fcs_reg(27) xor fcs_reg(31);
+fcs_reg(20) <= fcs_reg(12) xor fcs_reg(28);
+fcs_reg(21) <= fcs_reg(13) xor fcs_reg(29);
+fcs_reg(22) <= fcs_reg(14) xor fcs_reg(24);
+fcs_reg(23) <= fcs_reg(15) xor fcs_reg(24) xor fcs_reg(25) xor fcs_reg(30);
+fcs_reg(24) <= fcs_reg(16) xor fcs_reg(25) xor fcs_reg(26) xor fcs_reg(31);
+fcs_reg(25) <= fcs_reg(17) xor fcs_reg(26) xor fcs_reg(27);
+fcs_reg(26) <= fcs_reg(18) xor fcs_reg(24) xor fcs_reg(27) xor fcs_reg(28) xor fcs_reg(30);
+fcs_reg(27) <= fcs_reg(19) xor fcs_reg(25) xor fcs_reg(28) xor fcs_reg(29) xor fcs_reg(31);
+fcs_reg(28) <= fcs_reg(20) xor fcs_reg(26) xor fcs_reg(29) xor fcs_reg(30);
+fcs_reg(29) <= fcs_reg(21) xor fcs_reg(27) xor fcs_reg(30) xor fcs_reg(31);
+fcs_reg(30) <= fcs_reg(22) xor fcs_reg(28) xor fcs_reg(31);
+fcs_reg(31) <= fcs_reg(23) xor fcs_reg(29);
+
+			
+			if fcs_reg = "00000000000000000000000000000000" and complement_counter /= 0 then
+				fcs_error <= '0';
+			end if;
+        end if;
+    end process;
+end fcs_arch;
