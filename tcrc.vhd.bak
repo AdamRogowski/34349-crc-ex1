@@ -9,7 +9,8 @@ architecture testbench of fcs_check_serial_tb is
     component fcs_check_serial
     	port (
         	clk, rst, start_of_frame, end_of_frame, data_in : in std_logic;
-      		fcs_error : out std_logic_vector (31 downto 0)
+      		fcs_reg_output : out std_logic_vector (31 downto 0);
+			fcs_error : out std_logic
     	);
     end component;
 	
@@ -17,7 +18,8 @@ architecture testbench of fcs_check_serial_tb is
   	constant clk_period : time := 10 ns;
 
     signal clk_tb, rst_tb, start_of_frame_tb, end_of_frame_tb, data_in_tb : std_logic := '0';
-    signal fcs_error_tb : std_logic_vector(31 downto 0) := (others => '0');
+    signal fcs_reg_output_tb : std_logic_vector(31 downto 0) := (others => '0');
+	signal fcs_error_tb : std_logic := '1';	
 
 begin
     fcs_instance: fcs_check_serial port map (
@@ -26,7 +28,8 @@ begin
     end_of_frame => end_of_frame_tb,
 	rst => rst_tb,
     clk => clk_tb,
-    fcs_error => fcs_error_tb
+    fcs_reg_output => fcs_reg_output_tb,
+	fcs_error => fcs_error_tb
     );
 
 
@@ -41,17 +44,17 @@ begin
     	wait;
   	end process;
 
-  	-- Stimulus process
+
   	stimulus: process
   	variable index : integer := 1;
   	begin
-    	rst_tb <= '1'; -- Assert reset
+    	rst_tb <= '1';
     	start_of_frame_tb <= '0';
 		end_of_frame_tb <= '0';
     	data_in_tb <= '0';
     	wait for clk_period;
 
-    	rst_tb <= '0'; -- De-assert reset
+    	rst_tb <= '0';
 
 		for i in 1 to 512 loop
 
@@ -67,8 +70,6 @@ begin
                 when '1' =>
                     data_in_tb <= '1';
                 when others =>
-                    -- Handle invalid characters here
-                    -- For simplicity, just assign '0' in case of invalid characters
                     data_in_tb <= '0';
             end case;
 
@@ -84,9 +85,6 @@ begin
                 index := 1;
             end if;
     	end loop;
-
-		--crc_en_tb <= '0';
-
     	wait;
   	end process;
 end;

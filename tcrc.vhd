@@ -7,59 +7,62 @@ end fcs_check_serial_tb;
 architecture testbench of fcs_check_serial_tb is
 
     component fcs_check_serial
-    	port (
-        	clk, rst, start_of_frame, end_of_frame, data_in : in std_logic;
-      		fcs_error : out std_logic_vector (31 downto 0)
-    	);
+        port (
+            clk, rst, start_of_frame, end_of_frame, data_in : in std_logic;
+            fcs_reg_output : out std_logic_vector (31 downto 0);
+            fcs_error : out std_logic
+        );
     end component;
-	
-	constant sequence : string := "00000000000100001010010001111011111010101000000000000000000100100011010001010110011110001001000000001000000000000100010100000000000000000010111010110011111111100000000000000000100000000001000100000101010000001100000010101000000000000010110011000000101010000000000000000100000001000000000000000100000000000000000000011010001011011110100000000000000000010000001000000011000001000000010100000110000001110000100000001001000010100000101100001100000011010000111000001111000100000001000111100110110001010011110110110010";
-  	constant clk_period : time := 10 ns;
+    
+    constant sequence : string := "00000000000100001010010001111011111010101000000000000000000100100011010001010110011110001001000000001000000000000100010100000000000000000010111010110011111111100000000000000000100000000001000100000101010000001100000010101000000000000010110011000000101010000000000000000100000001000000000000000100000000000000000000011010001011011110100000000000000000010000001000000011000001000000010100000110000001110000100000001001000010100000101100001100000011010000111000001111000100000001000111100110110001010011110110110010";
+    constant clk_period : time := 10 ns;
 
     signal clk_tb, rst_tb, start_of_frame_tb, end_of_frame_tb, data_in_tb : std_logic := '0';
-    signal fcs_error_tb : std_logic_vector(31 downto 0) := (others => '0');
+    signal fcs_reg_output_tb : std_logic_vector(31 downto 0) := (others => '0');
+    signal fcs_error_tb : std_logic := '1';    
 
 begin
     fcs_instance: fcs_check_serial port map (
-    data_in => data_in_tb,
-    start_of_frame => start_of_frame_tb,
-    end_of_frame => end_of_frame_tb,
-	rst => rst_tb,
-    clk => clk_tb,
-    fcs_error => fcs_error_tb
+        data_in => data_in_tb,
+        start_of_frame => start_of_frame_tb,
+        end_of_frame => end_of_frame_tb,
+        rst => rst_tb,
+        clk => clk_tb,
+        fcs_reg_output => fcs_reg_output_tb,
+        fcs_error => fcs_error_tb
     );
 
 
-  	clk_process: process
-  	begin
-    	while now < clk_period * 600 loop
-      		clk_tb <= '0';
-      		wait for clk_period / 2;
-      		clk_tb <= '1';
-      		wait for clk_period / 2;
-    	end loop;
-    	wait;
-  	end process;
+    clk_process: process
+    begin
+        while now < clk_period * 600 loop
+            clk_tb <= '0';
+            wait for clk_period / 2;
+            clk_tb <= '1';
+            wait for clk_period / 2;
+        end loop;
+        wait;
+    end process;
 
 
-  	stimulus: process
-  	variable index : integer := 1;
-  	begin
-    	rst_tb <= '1';
-    	start_of_frame_tb <= '0';
-		end_of_frame_tb <= '0';
-    	data_in_tb <= '0';
-    	wait for clk_period;
+    stimulus: process
+    variable index : integer := 1;
+    begin
+        rst_tb <= '1';
+        start_of_frame_tb <= '0';
+        end_of_frame_tb <= '0';
+        data_in_tb <= '0';
+        wait for clk_period;
 
-    	rst_tb <= '0';
+        rst_tb <= '0';
 
-		for i in 1 to 512 loop
+        for i in 1 to 512 loop
 
-			if index = 1 then
-				start_of_frame_tb <= '1';
-			else
-				start_of_frame_tb <= '0';
-			end if;
+            if index = 1 then
+                start_of_frame_tb <= '1';
+            else
+                start_of_frame_tb <= '0';
+            end if;
 
             case sequence(index) is
                 when '0' =>
@@ -70,18 +73,19 @@ begin
                     data_in_tb <= '0';
             end case;
 
-			if index = (512 - 31) then
-				end_of_frame_tb <= '1';
-			else
-				end_of_frame_tb <= '0';
-			end if;
+            if index = (512 - 31) then
+                end_of_frame_tb <= '1';
+            else
+                end_of_frame_tb <= '0';
+            end if;
 
             wait for clk_period;
             index := index + 1;
             if index > 512 then
                 index := 1;
             end if;
-    	end loop;
-    	wait;
-  	end process;
+        end loop;
+        wait;
+    end process;
 end;
+
